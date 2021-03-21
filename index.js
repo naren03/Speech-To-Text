@@ -1,15 +1,15 @@
 window.SpeechRecognition =
 	window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const speakBtn = document.getElementById('speak');
-const output = document.querySelector('.result');
-const mainBox = document.querySelector('.container');
 //speech recognition var
 let myRecognition = new window.SpeechRecognition();
 //random Number generator
-// let randomNumber = Math.floor(Math.random() * 100) + 1;
-let randomNumber = 15;
+let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log('Number:' + randomNumber);
+//all event listeners
+const speakBtn = document.getElementById('speak');
+const output = document.querySelector('.result');
+const mainBox = document.querySelector('.container');
 
 //clicking on speak now
 speakBtn.addEventListener('click', () => {
