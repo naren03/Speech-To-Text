@@ -21,6 +21,10 @@ myRecognition.addEventListener('result', (event) => {
 	chkNumber(userInput);
 });
 
+myRecognition.addEventListener('end', () => {
+	myRecognition.start();
+});
+
 //functions
 
 function chkNumber(number) {
