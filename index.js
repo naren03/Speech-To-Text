@@ -3,58 +3,65 @@ window.SpeechRecognition =
 
 //speech recognition var
 let myRecognition = new window.SpeechRecognition();
+
 //random Number generator
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log('Number:' + randomNumber);
+
 //all event listeners
-const speakBtn = document.getElementById('speak');
-const mainBox = document.querySelector('.container');
+const mainBox = document.querySelector('.output');
 
-//clicking on speak now
-// speakBtn.addEventListener('click', (e) => {
-// 	e.preventDefault();
+//recording voice
 myRecognition.start();
-// });
 
+//when voice is detected and ready
 myRecognition.addEventListener('result', (event) => {
 	let userInput = event.results[0][0].transcript;
 	chkNumber(userInput);
 });
 
+//when everything stops start recording again
 myRecognition.addEventListener('end', () => {
 	myRecognition.start();
 });
 
+//reload page
 document.body.addEventListener('click', (e) => {
-	if ((e.target.id = 'play-again')) {
+	if (e.target.id == 'play-again') {
 		window.location.reload();
 	}
 });
-//functions
 
+//check the number given by user
 function chkNumber(msg) {
 	const number = +msg;
-	// speakBtn.style.display = 'none';
 
 	//display what user said
-	mainBox.appendChild = `<p>You Said:</p><span>${number}</span>`;
+	mainBox.innerHTML = `<p>You Said:</p><span>${msg}</span>`;
 
+	// Number or not
 	if (Number.isNaN(number)) {
-		// let answer = document.createElement('div');
-		// answer.setAttribute('class', 'user-input');
-		// answer.innerHTML = `<p>You Said:</p><span>${number}</span><p class="message">It Is Not Valid Number</p>`;
-		mainBox.appendChild = `<p class="message">It Is Not Valid Number</p>`;
-	} else if (number === randomNumber) {
-		document.body.innerHTML = `<div class="container"><div class="answer"><h1>Congrats! You Have Guessed The Number</h1><h3>It Was ${number}</h3><a id="play-again>Play Again</a></div></div>`;
+		mainBox.innerHTML += `<p class="message">It Is Not Valid Number</p>`;
+	}
 
-		// mainBox.children[0].appendChild(playAgain);
-	} else if (number < randomNumber) {
-		mainBox.appendChild = `<p class="message">Go Higher</p>`;
-	} else if (number > randomNumber) {
-		mainBox.appendChild = `<p class="message">Go Lower</p>`;
-	} else if (number > 100 || number < 1) {
-		mainBox.appendChild = `<p class="message">Number Should Be Between 1-100</p>`;
-	} else {
+	//if number is equal
+	if (number === randomNumber) {
+		document.body.innerHTML = `<div class="success"><h1>Congrats! You Have Guessed The Number</h1><h3>It Was ${number}</h3><button id="play-again">Play Again</button></div>`;
+	}
+
+	//out of range
+	if (number > 100 || number < 1) {
+		mainBox.innerHTML += `<p class="message">Number Should Be Between 1-100</p>`;
 		return;
+	}
+
+	//less than original number
+	if (number < randomNumber) {
+		mainBox.innerHTML += `<p class="message">Go Higher</p>`;
+	}
+
+	// greater than original number
+	if (number > randomNumber) {
+		mainBox.innerHTML += `<p class="message">Go Lower</p>`;
 	}
 }

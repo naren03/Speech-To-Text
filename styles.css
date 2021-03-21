@@ -5,12 +5,10 @@
 }
 body {
 	background-color: #eee;
-	padding: 20px;
-}
-.container {
-	width: 100%;
+	text-align: center;
+	width: 80%;
+	margin: 40px auto;
 	height: 80vh;
-	padding: 20px;
 	border: 2px solid black;
 	background-color: white;
 	border-radius: 50px;
@@ -20,41 +18,41 @@ body {
 	justify-content: space-between;
 	align-items: center;
 }
+
 img {
 	width: 70%;
 }
 h1 {
 	font-size: 26px;
 }
-h3 {
+h2 {
 	font-size: 20px;
 }
-.user-input p {
+p {
 	font-size: 20px;
 }
-.user-input span {
+span {
 	font-size: 20px;
 	display: inline-block;
 	border: 3px solid black;
 	padding: 10px 20px;
 	margin: 15px;
 }
-.user-input .message {
+.message {
 	text-transform: capitalize;
 	color: red;
+	margin: 20px;
 }
-.answer {
-	margin-top: 200px;
+.success h1 {
+	margin-top: 100px;
 }
-.answer h3 {
+.success h3 {
 	margin: 20px;
 	color: green;
 	font-size: 24px;
 }
-a {
+.success button {
 	font-size: 20px;
-	display: inline-block;
-	text-decoration: none;
 	padding: 20px;
 	margin: 20px;
 	color: white;
@@ -62,16 +60,16 @@ a {
 	border-radius: 50px;
 	cursor: pointer;
 }
-a:focus {
+button:focus {
 	outline: none;
 }
 
 @media screen and (min-width: 1100px) {
-	.container {
-		width: 50%;
+	.body {
+		width: 100%;
 		margin: 0 auto;
 	}
 	img {
-		width: 50%;
+		width: 20%;
 	}
 }
