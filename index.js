@@ -12,7 +12,8 @@ const output = document.querySelector('.result');
 const mainBox = document.querySelector('.container');
 
 //clicking on speak now
-speakBtn.addEventListener('click', () => {
+speakBtn.addEventListener('click', (e) => {
+	e.preventDefault();
 	myRecognition.start();
 });
 
@@ -27,10 +28,17 @@ myRecognition.addEventListener('end', () => {
 
 //functions
 
-function chkNumber(number) {
+function chkNumber(msg) {
+	const number = +msg;
 	speakBtn.style.display = 'none';
 
-	if (number === randomNumber) {
+	if (Number.isNaN(number)) {
+		let answer = document.createElement('div');
+
+		answer.setAttribute('class', 'user-input');
+
+		answer.innerHTML = `<p>You Said:</p><span>${number}</span><p class="message">It Is Not Valid Number</p>`;
+	} else if (number === randomNumber) {
 		mainBox.innerHTML = `<div class="answer"><h1>Congrats! You Have Guessed The Number</h1><h3>It Was ${number}</h3></div>`;
 
 		let playAgain = document.createElement('a');
@@ -49,7 +57,7 @@ function chkNumber(number) {
 
 		answer.innerHTML = `<p>You Said:</p><span>${number}</span><p class="message">Go Higher</p>`;
 		output.appendChild(answer);
-	} else {
+	} else if (randomNumber < number) {
 		let answer = document.createElement('div');
 
 		answer.setAttribute('class', 'user-input');
@@ -57,5 +65,12 @@ function chkNumber(number) {
 		answer.innerHTML = `<p>You Said:</p><span>${number}</span><p class="message">Go Lower</p>`;
 
 		output.appendChild(answer);
+	} else if (number > 100 || number < 1) {
+		let answer = document.createElement('div');
+
+		answer.setAttribute('class', 'user-input');
+
+		answer.innerHTML = `<p>You Said:</p><span>${number}</span><p class="message">Number Should Be Between 1-100</p>`;
+	} else {
 	}
 }
